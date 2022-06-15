@@ -2,13 +2,15 @@
 <html>
 
 <head>
-    <title>Card Games</title>
+    <title>BuildIT Planning</title>
 </head>
 
 <body>
     <ul id="messages"></ul>
     <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
+        <label for="input">Enter your name: </label>
+        <input id="input" autocomplete="off" />
+        <button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -21,7 +23,7 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             if (input.value) {
-                socket.emit('chat message', input.value);
+                socket.emit('name', input.value);
                 input.value = '';
             }
         });
@@ -32,11 +34,6 @@
             messages.appendChild(item);
         });
 
-        socket.on('new player'), function (deck) {
-            var card = document.createElement('li');
-            item.textContent = "new card here"
-            messages.appendChild(item);
-        }
     </script>
 </body>
 
