@@ -4,7 +4,16 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const short = require('short-uuid');
-const io = new Server(server)
+const cors = require("cors")
+app.use(cors)
+
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:9080",
+    methods: ["GET", "POST"],
+  },
+});
 
 setInterval(() => {
   io.emit('ping');
@@ -15,9 +24,8 @@ app.get('/', (req, res) => {
   res.sendFile('client/index.html', {'root': '../'});
 });
 
-console.log(process.env.ORIGIN);
-server.listen(9080, () => {
-  console.log('listening on *:9080');
+server.listen(9081, () => {
+  console.log('listening on *:9081');
 });
 
 let players = [];
