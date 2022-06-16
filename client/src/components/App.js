@@ -1,14 +1,17 @@
 import React from 'react'
 import Home from './Home'
 import PlanningRoom from './PlanningRoom';
-import io from "socket.io-client";
-
-const socket = io.connect("http://localhost:9081")
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function App() {
-  
   return (
-      <Home />
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/planning/:roomId' element={<PlanningRoom/>}></Route>
+      </Routes>
+    </Router>
   );
 }
 
